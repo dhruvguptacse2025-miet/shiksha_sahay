@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <h1>
+            Make Every Government School Better 🏫
+        </h1>
+
+        <p>
+            Report school infrastructure problems,
+            track complaints and monitor their resolution
+            through one digital platform.
+        </p>
+
+        <a href="/report"
+           class="btn">
+            + Report a Problem
+        </a>
+
+        <a href="/track"
+           class="btn secondary">
+            Track Complaint
+        </a>
+
+    </div>
+
+    <div class="hero-icon">
+    <img src="{{ url_for('static', filename='uploads/shiksha_sahay.jpg') }}"
+         alt="Shiksha Sahay Logo">
+</div>
+
+</section>
+
+
+<section class="container">
+
+    <h2>
+        School Dashboard
+    </h2>
+
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h3>
+                {{ total }}
+            </h3>
+
+            <p>
+                Total Complaints
+            </p>
+
+        </div>
+
+
+        <div class="stat-card pending">
+
+            <h3>
+                {{ pending }}
+            </h3>
+
+            <p>
+                Pending
+            </p>
+
+        </div>
+
+
+        <div class="stat-card progress">
+
+            <h3>
+                {{ progress }}
+            </h3>
+
+            <p>
+                In Progress
+            </p>
+
+        </div>
+
+
+        <div class="stat-card resolved">
+
+            <h3>
+                {{ resolved }}
+            </h3>
+
+            <p>
+                Resolved
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Recent Complaints
+    </h2>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+                <th>School</th>
+                <th>Problem</th>
+                <th>Priority</th>
+                <th>Status</th>
+
+            </tr>
+
+
+            {% for complaint in recent %}
+
+            <tr>
+
+                <td>
+                    GS-{{ complaint.id }}
+                </td>
+
+                <td>
+                    {{ complaint.school_name }}
+                </td>
+
+                <td>
+                    {{ complaint.category }}
+                </td>
+
+                <td>
+                    {{ complaint.priority }}
+                </td>
+
+                <td>
+
+                    <span class="badge">
+                        {{ complaint.status }}
+                    </span>
+
+                </td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="5">
+                    No complaints yet.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

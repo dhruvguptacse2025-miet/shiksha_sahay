@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="container">
+
+    <div class="form-card">
+
+        <h1>
+            📝 Report School Problem
+        </h1>
+
+        <p>
+            Fill in the details below to submit a complaint.
+        </p>
+
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+
+            <label>
+                School Name
+            </label>
+
+            <input
+                type="text"
+                name="school_name"
+                placeholder="Enter school name"
+                required
+            >
+
+
+            <label>
+                School Location
+            </label>
+
+            <input
+                type="text"
+                name="location"
+                placeholder="City / Village / Address"
+                required
+            >
+
+
+            <label>
+                Problem Category
+            </label>
+
+            <select name="category">
+
+                <option>Electricity</option>
+
+                <option>Water Supply</option>
+
+                <option>Furniture</option>
+
+                <option>Toilet / Sanitation</option>
+
+                <option>Internet</option>
+
+                <option>Building Damage</option>
+
+                <option>Other</option>
+
+            </select>
+
+
+            <label>
+                Priority
+            </label>
+
+            <select name="priority">
+
+                <option>Low</option>
+
+                <option>Medium</option>
+
+                <option>High</option>
+
+                <option>Emergency</option>
+
+            </select>
+
+
+            <label>
+                Problem Description
+            </label>
+
+            <textarea
+                name="description"
+                placeholder="Explain the problem..."
+                required
+            ></textarea>
+
+
+            <label>
+                Upload Photo
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                accept=".jpg,.jpeg,.png,.webp"
+            >
+
+
+            <button
+                type="submit"
+                class="btn">
+                Submit Complaint
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

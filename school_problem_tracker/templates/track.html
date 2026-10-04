@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="container">
+
+    <h1>
+        🔎 Track Complaints
+    </h1>
+
+
+    <form method="GET"
+          class="search">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search by complaint ID, school or category"
+            value="{{ search }}"
+        >
+
+        <button class="btn">
+            Search
+        </button>
+
+    </form>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+                <th>School</th>
+                <th>Location</th>
+                <th>Problem</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Date</th>
+
+            </tr>
+
+
+            {% for complaint in complaints %}
+
+            <tr>
+
+                <td>
+                    GS-{{ complaint.id }}
+                </td>
+
+                <td>
+                    {{ complaint.school_name }}
+                </td>
+
+                <td>
+                    {{ complaint.location }}
+                </td>
+
+                <td>
+                    {{ complaint.category }}
+                </td>
+
+                <td>
+                    {{ complaint.priority }}
+                </td>
+
+                <td>
+
+                    <span class="badge">
+                        {{ complaint.status }}
+                    </span>
+
+                </td>
+
+                <td>
+                    {{ complaint.created_at }}
+                </td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="7">
+                    No complaints found.
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}

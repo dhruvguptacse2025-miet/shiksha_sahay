@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="container">
+
+    <h1>
+        👨‍💼 Admin Dashboard
+    </h1>
+
+    <p>
+        Manage and update school complaints.
+    </p>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <tr>
+
+                <th>ID</th>
+                <th>School</th>
+                <th>Problem</th>
+                <th>Priority</th>
+                <th>Photo</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+
+
+            {% for complaint in complaints %}
+
+            <tr>
+
+                <td>
+                    GS-{{ complaint.id }}
+                </td>
+
+                <td>
+                    {{ complaint.school_name }}
+                </td>
+
+                <td>
+                    {{ complaint.category }}
+                </td>
+
+                <td>
+                    {{ complaint.priority }}
+                </td>
+
+
+                <td>
+
+                    {% if complaint.image %}
+
+                    <img
+                        src="{{ url_for('static',
+                        filename='uploads/' + complaint.image) }}"
+                        width="70"
+                    >
+
+                    {% else %}
+
+                    No Image
+
+                    {% endif %}
+
+                </td>
+
+
+                <td>
+
+                    <form
+                        method="POST"
+                        action="/update/{{ complaint.id }}"
+                    >
+
+                        <select name="status">
+
+                            <option
+                            {% if complaint.status == "Pending" %}
+                            selected
+                            {% endif %}>
+                            Pending
+                            </option>
+
+                            <option
+                            {% if complaint.status == "In Progress" %}
+                            selected
+                            {% endif %}>
+                            In Progress
+                            </option>
+
+                            <option
+                            {% if complaint.status == "Resolved" %}
+                            selected
+                            {% endif %}>
+                            Resolved
+                            </option>
+
+                        </select>
+
+                        <button class="small-btn">
+                            Update
+                        </button>
+
+                    </form>
+
+                </td>
+
+
+                <td>
+
+                    <form
+                        method="POST"
+                        action="/delete/{{ complaint.id }}"
+                    >
+
+                        <button
+                            class="delete-btn"
+                            onclick="return confirm('Delete complaint?')"
+                        >
+                            Delete
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</section>
+
+{% endblock %}
